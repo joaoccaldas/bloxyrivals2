@@ -1,0 +1,1254 @@
+/* styles.css - Unified Design System */
+
+/* CSS Custom Properties - Design System */
+:root {
+  /* Primary Color Palette */
+  --primary-color: #2563EB;
+  --primary-dark: #1E40AF;
+  --primary-light: #3B82F6;
+  --primary-hover: #1D4ED8;
+  
+  /* Secondary Colors */
+  --secondary-color: #6B7280;
+  --secondary-dark: #4B5563;
+  --secondary-light: #9CA3AF;
+  
+  /* Accent Colors */
+  --accent-success: #10B981;
+  --accent-warning: #F59E0B;
+  --accent-danger: #EF4444;
+  --accent-info: #06B6D4;
+  /* Special UI Colors */
+  --color-shop: #FFD700; /* Gold color */
+  --color-shop-dark: #E6C200; /* Darker gold for gradients */
+  --color-shop-border: #FFA500;
+  --color-shop-hover: #FFC107;
+  --color-shop-text: #3A3118; /* Dark text for contrast */
+  
+  /* Button Color System */
+  --color-success: #28A745;
+  --color-success-dark: #1E7E34;
+  --color-success-hover: #218838;
+  --color-info: #17A2B8;
+  --color-info-dark: #138496;
+  --color-info-hover: #148A9C;
+  --color-purple: #6F42C1;
+  --color-purple-dark: #5A2D91;
+  --color-purple-hover: #5D2E8B;
+  --color-danger: #DC3545;
+  --color-danger-dark: #C82333;
+  --color-danger-hover: #BD2130;
+  --color-orange: #FD7E14;
+  --color-orange-dark: #DC6A00;
+  --color-orange-hover: #E8681F;
+  --color-neutral: #6C757D;
+  --color-neutral-dark: #5A6268;
+  --color-neutral-hover: #5A6268;
+  
+  /* Background Colors */
+  --bg-primary: #000000;
+  --bg-game: #1C7ED6;
+  --bg-overlay: rgba(0, 0, 0, 0.3);
+  --bg-button: rgba(255, 255, 255, 0.9);
+  --bg-button-hover: rgba(255, 255, 255, 1);
+  
+  /* Text Colors */
+  --text-primary: #FFFFFF;
+  --text-secondary: #E5E7EB;
+  --text-dark: #1F2937;
+  --text-button: #333333;
+  
+  /* Typography Scale */
+  --font-size-xs: clamp(0.75rem, 1.5vw, 0.875rem);
+  --font-size-sm: clamp(0.875rem, 2vw, 1rem);
+  --font-size-base: clamp(1rem, 2.5vw, 1.125rem);
+  --font-size-lg: clamp(1.125rem, 3vw, 1.25rem);
+  --font-size-xl: clamp(1.25rem, 3.5vw, 1.5rem);
+  --font-size-2xl: clamp(1.5rem, 4vw, 2rem);
+  --font-size-3xl: clamp(2rem, 5vw, 3rem);
+  
+  /* Spacing Scale */
+  --spacing-xs: clamp(4px, 0.5vw, 6px);
+  --spacing-sm: clamp(6px, 1vw, 8px);
+  --spacing-md: clamp(8px, 1.5vw, 12px);
+  --spacing-lg: clamp(12px, 2vw, 16px);
+  --spacing-xl: clamp(16px, 2.5vw, 20px);
+  --spacing-2xl: clamp(20px, 3vw, 24px);
+  --spacing-3xl: clamp(24px, 4vw, 32px);
+  
+  /* Border Radius */
+  --border-radius-sm: clamp(4px, 0.5vw, 6px);
+  --border-radius-md: clamp(6px, 1vw, 8px);
+  --border-radius-lg: clamp(8px, 1.5vw, 12px);
+  --border-radius-xl: clamp(12px, 2vw, 16px);
+  
+  /* Border Widths */
+  --border-width-thin: max(1px, 0.1vmin);
+  --border-width-normal: max(2px, 0.2vmin);
+  --border-width-thick: max(3px, 0.3vmin);
+  
+  /* Shadows */
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 8px 15px rgba(0, 0, 0, 0.2);
+  --shadow-button: 0 max(2px, 0.2vmin) max(6px, 0.6vmin) rgba(0, 0, 0, 0.3);
+  --shadow-button-hover: 0 max(4px, 0.4vmin) max(8px, 0.8vmin) rgba(0, 0, 0, 0.3);
+  
+  /* Transitions */
+  --transition-fast: 0.2s ease;
+  --transition-normal: 0.3s ease;
+  --transition-slow: 0.5s ease;
+  
+  /* Z-Index Scale */
+  --z-background: 0;
+  --z-game: 1;
+  --z-overlay: 2;
+  --z-ui: 10;
+  --z-modal: 100;
+  --z-tooltip: 1000;
+}
+
+/* Add responsive viewport handling */
+* {
+  box-sizing: border-box;
+}
+
+/* Global reset */
+html, body {
+  margin: 0;
+  padding: 0;
+  background: var(--bg-primary);
+  overflow: hidden;
+  height: 100%;
+  width: 100%;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+/* Canvas centering and aspect-ratio enforcement */
+canvas {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  max-width: 100vw;
+  max-height: 100vh;
+  width: auto;
+  height: auto;
+  background-color: var(--bg-game);
+  display: block;
+  z-index: var(--z-game);
+  image-rendering: pixelated;
+}
+
+/* Video Loading Screen */
+#videoLoadingScreen {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: var(--bg-primary);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: var(--z-modal);
+  overflow: hidden;
+  opacity: 1;
+  transition: opacity 500ms ease-in-out;
+}
+
+#loadingVideo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: var(--z-game);
+}
+
+#loadingProgress {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80%;
+  height: 5px;
+  background-color: rgba(255, 255, 255, 0.3);
+  border-radius: var(--border-radius-lg);
+  overflow: hidden;
+  z-index: var(--z-ui);
+}
+
+#loadingBar {
+  height: 100%;
+  width: 0%;
+  background-color: var(--primary-color);
+  border-radius: var(--border-radius-lg);
+  transition: width 0.3s ease;
+}
+
+#skipButton {
+  position: absolute;
+  bottom: 40px;
+  right: 20px;
+  padding: var(--spacing-sm) var(--spacing-lg);
+  background-color: rgba(0, 0, 0, 0.6);
+  color: var(--text-primary);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: var(--border-radius-md);
+  cursor: pointer;
+  font-size: var(--font-size-sm);
+  z-index: var(--z-ui);
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: bold;
+}
+
+#skipButton:hover {
+  background-color: var(--primary-color);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+}
+
+.hidden {
+  display: none !important;
+  pointer-events: none !important;
+}
+
+/* Responsive canvas sizing */
+@media (max-width: 768px) {
+  canvas {
+    max-width: 100vw;
+    max-height: 100vh;
+  }
+}
+
+/* Landing screen overlay */
+#landingScreen {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('../assets/Scene/landingpage.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-2xl);
+  z-index: var(--z-overlay);
+  opacity: 0;
+  transition: opacity 800ms ease-in-out;
+  pointer-events: none; /* Disable interaction when not fully visible */
+}
+
+#landingScreen.visible {
+  opacity: 1;
+  pointer-events: auto; /* Enable interaction when visible */
+}
+
+/* Button debugging helper */
+.button-debug button:active {
+  outline: 3px solid red !important;
+  animation: buttonClickEffect 0.5s ease-out;
+}
+
+@keyframes buttonClickEffect {
+  0% { box-shadow: 0 0 0 0 rgba(255,0,0,0.8); }
+  70% { box-shadow: 0 0 0 15px rgba(255,0,0,0); }
+  100% { box-shadow: 0 0 0 0 rgba(255,0,0,0); }
+}
+
+/* Add overlay for better text readability */
+#landingScreen::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: var(--bg-overlay);
+  z-index: 1;
+}
+
+/* Ensure buttons are above overlay */
+#landingScreen > * {
+  position: relative;
+  z-index: 2;
+}
+
+#landingScreen h1 {
+  color: var(--text-primary);
+  font-family: sans-serif;
+  font-size: var(--font-size-3xl);
+  margin: 0;
+  text-align: center;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+}
+
+#landingScreen input {
+  width: min(240px, 80vw);
+  padding: var(--spacing-md);
+  font-size: var(--font-size-base);
+  border: var(--border-width-normal) solid var(--text-button);
+  border-radius: var(--border-radius-lg);
+  outline: none;
+  background: var(--bg-button);
+}
+
+/* Unified Button Styles */
+#landingScreen button {
+  width: min(240px, 80vw);
+  padding: var(--spacing-md);
+  font-size: var(--font-size-base);
+  border: var(--border-width-normal) solid var(--text-button);
+  border-radius: var(--border-radius-lg);
+  background: var(--bg-button);
+  color: var(--text-button);
+  cursor: pointer;
+  transition: all var(--transition-normal);
+  font-weight: bold;
+  margin: var(--spacing-sm);
+}
+
+/* Play button specific styling */
+#btnStart {
+  position: absolute !important;
+  bottom: var(--spacing-3xl) !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+  width: min(320px, 90vw) !important;
+  padding: var(--spacing-lg) !important;
+  font-size: var(--font-size-xl) !important;
+  background-color: var(--accent-success) !important;
+  color: var(--text-primary) !important;
+  border: var(--border-width-thick) solid var(--color-success-dark) !important;
+  box-shadow: var(--shadow-lg) !important;
+  z-index: var(--z-ui) !important;
+}
+
+#btnStart:hover {
+  background-color: var(--color-success-hover) !important;
+  transform: translateX(-50%) scale(1.05) !important;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4) !important;
+}
+
+/* Game Mode button positioned to the left of the Play button */
+#btnGameMode {
+  position: absolute !important;
+  bottom: var(--spacing-3xl) !important;
+  right: calc(50% + 170px) !important; /* Position to the left of the centered Play button */
+  width: min(240px, 35vw) !important;
+  padding: var(--spacing-md) !important;
+  font-size: var(--font-size-lg) !important;
+  background-color: var(--color-info) !important;
+  color: var(--text-primary) !important;
+  border: var(--border-width-thick) solid var(--color-info-dark) !important;
+  box-shadow: var(--shadow-lg) !important;
+  z-index: var(--z-ui) !important;
+}
+
+#btnGameMode:hover {
+  background-color: var(--color-info-hover) !important;
+  transform: scale(1.05) !important;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4) !important;
+}
+
+/* Rivals button positioned in top-left corner, aligned horizontally with shop button */
+#btnRivals {
+  position: absolute !important;
+  top: var(--spacing-lg) !important; /* Same top position as shop button */
+  left: calc(var(--spacing-lg) + clamp(180px, 26vmin, 360px)) !important; /* Position to the right of shop button */
+  width: clamp(160px, 24vmin, 320px) !important; /* Same width as shop button image */
+  height: auto !important;
+  min-width: auto !important;
+  padding: var(--spacing-md) !important;
+  margin: 0 !important;
+  z-index: var(--z-ui) !important;
+  transform-origin: top left;
+}
+
+/* Removed duplicate hover style as it's handled in .rivals-button:hover */
+
+/* Player name input removed */
+
+/* Shop button positioned in top-left corner with unified styling */
+.shop-button {
+  position: absolute !important;
+  top: 50% !important; /* Center vertically */
+  left: var(--spacing-lg) !important;
+  width: auto !important;
+  padding: 0 !important;
+  background: transparent !important;
+  border: none !important;
+  transition: all var(--transition-normal) !important;
+  z-index: var(--z-ui) !important;
+  min-width: 256px !important;  /* Doubled from 128px */
+  min-height: 256px !important; /* Doubled from 128px */
+  cursor: pointer !important;  transform-origin: center left;
+  transform: translateY(-50%) !important; /* Adjust to true center */
+}
+
+/* Rivals button positioned directly above the Shop button with same x-axis alignment */
+.rivals-button {
+  position: absolute !important;
+  top: 35% !important; /* Same x-axis as shop button */
+  left: var(--spacing-lg) !important; /* Exactly the same left position as Shop button */
+  margin-top: -180px !important; /* Position above shop button */
+  z-index: var(--z-ui) !important;
+  min-width: 180px !important; /* Smaller than shop button */
+  min-height: 180px !important; /* Smaller than shop button */
+  transform-origin: center left;
+}
+
+/* Profile button positioned in top-right corner */
+.profile-button {
+  position: absolute !important;
+  top: 20px !important; /* Position in top right */
+  right: var(--spacing-lg) !important;
+  padding: 0 !important;
+  background: transparent !important;
+  border: none !important;
+  transition: all var(--transition-normal) !important;
+  z-index: var(--z-ui) !important;
+  cursor: pointer !important;
+  width: auto !important;
+  padding: 0 !important;
+  background: transparent !important;
+  border: none !important;
+  transition: all var(--transition-normal) !important;
+  z-index: var(--z-ui) !important;
+  min-width: 256px !important;
+  min-height: 256px !important;
+  cursor: pointer !important;
+  transform-origin: center left;
+  transform: translateY(-50%) !important;
+}
+
+.shop-button:hover {
+  transform: translateY(-50%) scale(1.05) !important;
+  filter: brightness(1.2) saturate(1.2) !important;
+}
+
+.rivals-button:hover {
+  transform: scale(1.1) !important;
+  filter: brightness(1.3) saturate(1.3) !important;
+}
+
+.profile-button:hover {
+  transform: scale(1.1) !important;
+  filter: brightness(1.2) saturate(1.2) !important;
+}
+
+.shop-button img {
+  width: clamp(160px, 24vmin, 320px); /* Doubled from 80px-160px */
+  height: clamp(160px, 24vmin, 320px); /* Doubled from 80px-160px */
+  display: block;
+}
+
+.rivals-button img {
+  width: clamp(100px, 18vmin, 180px); /* Smaller than shop button */
+  height: clamp(100px, 18vmin, 180px); /* Smaller than shop button */
+  display: block;
+}
+
+.profile-button img {
+  width: 64px;
+  height: 64px;
+  display: block;
+  border-radius: 50%;
+  border: 3px solid var(--accent-primary);
+  background-color: var(--bg-secondary);
+}
+
+.shop-button img[src=""], .rivals-button img[src=""] {
+  display: none;
+}
+
+.shop-button:empty::after,
+.shop-button img[src=""]:after {
+  content: "SHOP";
+  font-size: var(--font-size-xs);
+  font-weight: bold;
+}
+
+.rivals-button:empty::after,
+.rivals-button img[src=""]:after {
+  content: "RIVALS";
+  font-size: var(--font-size-xs);
+  font-weight: bold;
+  color: var(--text-button);
+  display: block;
+  padding: var(--spacing-xs);
+}
+
+/* Improved media queries for better mobile responsiveness */
+@media (max-width: 768px) and (orientation: portrait) {
+  .shop-button {
+    top: 50% !important;
+    left: max(5px, 1vw) !important;
+    padding: max(6px, 1vmin) !important;
+    border-radius: max(6px, 1vmin) !important;
+    transform: translateY(-50%) !important;
+  }
+  
+  .shop-button img {
+    width: clamp(16px, 4vmin, 28px);
+    height: clamp(16px, 4vmin, 28px);
+  }
+  
+  #btnRivals {
+    top: max(5px, 1vh) !important; /* Position above shop button */
+    left: max(15px, 2vw) !important; /* Same left alignment as shop button */
+    width: clamp(16px, 4vmin, 28px) !important;
+    font-size: clamp(0.6rem, 1.5vmin, 0.8rem) !important;
+    padding: clamp(2px, 0.5vmin, 4px) !important;
+  }
+    #btnStart {
+    bottom: max(20px, 4vh) !important;
+    font-size: var(--font-size-lg) !important;
+    padding: var(--spacing-md) !important;
+  }
+  
+  #btnGameMode {
+    bottom: max(20px, 4vh) !important;
+    right: calc(50% + 140px) !important;
+    width: min(200px, 30vw) !important;
+    font-size: var(--font-size-base) !important;
+    padding: var(--spacing-sm) !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .shop-button {
+    top: 50% !important;
+    left: max(10px, 2vw) !important;
+    padding: max(8px, 1.5vmin) !important;
+    transform: translateY(-50%) !important;
+  }
+  
+  .shop-button img {
+    width: clamp(14px, 5vmin, 24px);
+    height: clamp(14px, 5vmin, 24px);
+  }
+  
+  #btnRivals {
+    top: max(10px, 1.5vh) !important; /* Position above shop button */
+    left: max(20px, 3vw) !important; /* Same left alignment as shop button */
+    width: clamp(14px, 5vmin, 24px) !important;
+    font-size: clamp(0.5rem, 1.2vmin, 0.7rem) !important;
+    padding: clamp(1px, 0.3vmin, 3px) !important;
+  }
+    #btnStart {
+    bottom: max(15px, 3vh) !important;
+    width: min(280px, 90vw) !important;
+    font-size: var(--font-size-base) !important;
+    padding: var(--spacing-sm) !important;
+  }
+  
+  #btnGameMode {
+    bottom: max(15px, 3vh) !important;
+    right: calc(50% + 150px) !important;
+    width: min(180px, 35vw) !important;
+    font-size: var(--font-size-sm) !important;
+    padding: var(--spacing-xs) !important;
+  }
+}
+
+@media (orientation: landscape) and (max-height: 600px) {
+  .shop-button {
+    top: 50% !important;
+    left: max(8px, 1vw) !important;
+    padding: max(3px, 0.3vmin) !important;
+    transform: translateY(-50%) !important;
+  }
+  
+  .shop-button img {
+    width: clamp(16px, 2.5vmin, 32px);
+    height: clamp(16px, 2.5vmin, 32px);
+  }
+  
+  #btnRivals {
+    top: max(4px, 0.5vh) !important; /* Position above shop button */
+    left: max(8px, 1vw) !important; /* Same left alignment as shop button */
+    width: clamp(16px, 2.5vmin, 32px) !important;
+    font-size: clamp(0.5rem, 1vmin, 0.75rem) !important;
+    padding: clamp(1px, 0.2vmin, 2px) !important;
+  }
+    #btnStart {
+    bottom: max(12px, 2vh) !important;
+    width: min(260px, 40vw) !important;
+    font-size: clamp(0.9rem, 1.8vmin, 1.2rem) !important;
+    padding: clamp(6px, 1.2vmin, 10px) !important;
+  }
+  
+  #btnGameMode {
+    bottom: max(12px, 2vh) !important;
+    right: calc(50% + 140px) !important;
+    width: min(160px, 25vw) !important;
+    font-size: clamp(0.7rem, 1.5vmin, 1rem) !important;
+    padding: clamp(4px, 1vmin, 8px) !important;
+  }
+}
+
+/* Additional mobile optimizations */
+@media (max-width: 320px) {
+  .shop-button {
+    top: 5vw !important;
+    left: 5vw !important;
+    padding: 2.5vw !important;
+  }
+  
+  .shop-button img {
+    width: clamp(16px, 6vw, 24px);
+    height: clamp(16px, 6vw, 24px);
+  }    #btnRivals {
+    top: 2vw !important; /* Above shop button */
+    left: 5vw !important; /* Same left alignment as shop button */
+    width: clamp(16px, 6vw, 24px) !important;
+    font-size: clamp(0.4rem, 1vw, 0.6rem) !important;
+    padding: clamp(1px, 0.2vw, 2px) !important;
+  }
+  
+  #landingScreen {
+    gap: clamp(8px, 1.5vw, 16px);
+  }
+  
+  #landingScreen h1 {
+    font-size: clamp(1.2rem, 5vw, 2rem);
+  }
+}
+
+/* Touch-friendly improvements */
+@media (hover: none) and (pointer: coarse) {
+  #landingScreen button,
+  .shop-button {
+    min-height: 44px; /* Minimum touch target size */
+    min-width: 44px;
+  }
+  
+  #landingScreen button {
+    padding: clamp(12px, 2vw, 20px);
+  }
+  
+  #btnRivals {
+    min-height: 44px !important;
+    min-width: 44px !important;
+  }
+}
+
+/* High DPI displays */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  canvas {
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+  }
+}
+
+/* Shop Screen Styling */
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.85);
+  z-index: var(--z-modal);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+  pointer-events: none;
+}
+
+.overlay.visible {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.shop-container {
+  width: 80%;
+  max-width: 900px;
+  height: 80%;
+  max-height: 700px;
+  background: linear-gradient(to bottom, #2a2a3a, #1a1a2a);
+  border-radius: var(--border-radius-lg);
+  border: var(--border-width-thick) solid var(--color-shop-border);
+  box-shadow: 0 0 20px rgba(255, 215, 0, 0.3), inset 0 0 10px rgba(255, 215, 0, 0.1);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  animation: shopEnter 0.5s ease-out;
+}
+
+@keyframes shopEnter {
+  from {
+    transform: scale(0.9);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.shop-header {
+  background: linear-gradient(to right, var(--color-shop-dark), var(--color-shop));
+  padding: var(--spacing-lg);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Coin balance container in shop header */
+.coin-balance-container {
+  display: flex;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.2);
+  padding: var(--spacing-xs) var(--spacing-md);
+  border-radius: var(--border-radius-md);
+  border: var(--border-width-thin) solid rgba(0, 0, 0, 0.1);
+}
+
+.shop-header h2 {
+  color: var(--text-dark);
+  margin: 0;
+  font-size: var(--font-size-2xl);
+  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.3);
+}
+
+.close-button {
+  background: transparent;
+  border: none;
+  color: var(--text-dark);
+  font-size: var(--font-size-3xl);
+  cursor: pointer;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  transition: all 0.2s;
+}
+
+.close-button:hover {
+  background-color: rgba(0, 0, 0, 0.2);
+  transform: scale(1.1);
+}
+
+.shop-content {
+  flex: 1;
+  padding: var(--spacing-xl);
+  overflow-y: auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: auto 1fr;
+  gap: var(--spacing-2xl);
+}
+
+/* Daily Reward Section */
+.daily-reward {
+  background: linear-gradient(to bottom, #2d3748, #1a202c);
+  border-radius: var(--border-radius-lg);
+  padding: var(--spacing-lg);
+  border: var(--border-width-normal) solid var(--color-shop-border);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.daily-reward h3 {
+  color: var(--color-shop);
+  margin-top: 0;
+  margin-bottom: var(--spacing-lg);
+  font-size: var(--font-size-xl);
+}
+
+#dailyRewardStatus {
+  color: var(--text-primary);
+  margin-bottom: var(--spacing-lg);
+  font-size: var(--font-size-base);
+}
+
+.reward-button {
+  background: linear-gradient(to bottom, var(--color-success), var(--color-success-dark));
+  color: white;
+  border: none;
+  padding: var(--spacing-md) var(--spacing-2xl);
+  border-radius: var(--border-radius-md);
+  cursor: pointer;
+  font-weight: bold;
+  transition: all 0.3s;
+}
+
+.reward-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.reward-button:disabled {
+  background: var(--color-neutral);
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+/* Shop Offers Section */
+.shop-offers {
+  background: linear-gradient(to bottom, #2d3748, #1a202c);
+  border-radius: var(--border-radius-lg);
+  padding: var(--spacing-lg);
+  border: var(--border-width-normal) solid var(--color-shop-border);
+}
+
+.shop-offers h3 {
+  color: var(--color-shop);
+  margin-top: 0;
+  margin-bottom: var(--spacing-xl);
+  font-size: var(--font-size-xl);
+  text-align: center;
+}
+
+.offers-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: var(--spacing-lg);
+}
+
+.offer-item {
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: var(--border-radius-md);
+  padding: var(--spacing-md);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  transition: transform 0.3s;
+  border: var(--border-width-thin) solid rgba(255, 255, 255, 0.1);
+}
+
+.offer-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.offer-image {
+  width: 80px;
+  height: 80px;
+  margin-bottom: var(--spacing-md);
+}
+
+.offer-title {
+  color: var(--text-primary);
+  font-weight: bold;
+  margin-bottom: var(--spacing-sm);
+}
+
+.offer-price {
+  color: var(--color-shop);
+  font-weight: bold;
+  margin-bottom: var(--spacing-md);
+}
+
+.buy-button {
+  background: linear-gradient(to bottom, var(--primary-color), var(--primary-dark));
+  color: white;
+  border: none;
+  padding: var(--spacing-xs) var(--spacing-lg);
+  border-radius: var(--border-radius-sm);
+  cursor: pointer;
+  font-weight: bold;
+  transition: all 0.2s;
+}
+
+.buy-button:hover {
+  background: linear-gradient(to bottom, var(--primary-hover), var(--primary-dark));
+  transform: scale(1.05);
+}
+
+/* Responsive Shop */
+@media (max-width: 768px) {
+  .shop-container {
+    width: 95%;
+    height: 95%;
+  }
+  
+  .shop-header h2 {
+    font-size: var(--font-size-xl);
+  }
+  
+  .shop-content {
+    padding: var(--spacing-md);
+    gap: var(--spacing-lg);
+  }
+  
+  .offers-grid {
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: var(--spacing-md);
+  }
+}
+
+@media (max-width: 480px) {
+  .shop-container {
+    width: 100%;
+    height: 100%;
+    border-radius: 0;
+  }
+  
+  .shop-content {
+    padding: var(--spacing-sm);
+  }
+  
+  .offers-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-sm);
+  }
+}
+
+/* Animation for reward claim */
+@keyframes rewardClaimed {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.2); }
+  100% { transform: scale(1); }
+}
+
+.reward-claimed {
+  animation: rewardClaimed 0.5s ease-out;
+}
+
+/* Coin Display Styling */
+:root {
+  /* Coin colors */
+  --coin-outer: #FFD700; /* Gold */
+  --coin-inner: #FFC125; /* Darker gold */
+  --coin-edge: #B8860B; /* Dark gold edge */
+  --coin-shine: rgba(255, 255, 255, 0.8); /* Shine effect */
+  --coin-shadow: rgba(0, 0, 0, 0.3); /* Shadow effect */
+}
+
+.coin-display {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+}
+
+/* Coin sizes */
+.coin-display.small .coin {
+  width: 20px;
+  height: 20px;
+  border-width: 2px;
+}
+
+.coin-display.medium .coin {
+  width: 30px;
+  height: 30px;
+  border-width: 3px;
+}
+
+.coin-display.large .coin {
+  width: 40px;
+  height: 40px;
+  border-width: 4px;
+}
+
+/* Basic coin style */
+.coin {
+  background: radial-gradient(circle at 30% 30%, var(--coin-outer), var(--coin-inner));
+  border-radius: 50%;
+  border: var(--border-width-normal) solid var(--coin-edge);
+  box-shadow: 
+    inset 0 0 8px var(--coin-shadow),
+    0 0 4px var(--coin-shine),
+    0 2px 4px var(--coin-shadow);
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform-style: preserve-3d;
+  perspective: 100px;
+}
+
+/* Coin text style */
+.coin::after {
+  content: "C";
+  color: var(--coin-edge);
+  font-weight: bold;
+  font-family: sans-serif;
+  font-size: 60%;
+  text-shadow: 0 1px 1px var(--coin-shadow);
+}
+
+/* Amount text style */
+.coin-amount {
+  color: var(--coin-outer);
+  font-weight: bold;
+  font-size: var(--font-size-base);
+  text-shadow: 0 1px 2px var(--coin-shadow);
+}
+
+/* Small size text */
+.coin-display.small .coin-amount {
+  font-size: var(--font-size-xs);
+}
+
+/* Large size text */
+.coin-display.large .coin-amount {
+  font-size: var(--font-size-lg);
+}
+
+/* Shine effect */
+.coin-shine {
+  position: absolute;
+  top: 15%;
+  left: 15%;
+  width: 30%;
+  height: 30%;
+  background: linear-gradient(135deg, var(--coin-shine) 0%, transparent 50%);
+  border-radius: 50%;
+  opacity: 0.8;
+}
+
+/* Animation for the coin */
+.coin.animated {
+  animation: coinRotate 8s linear infinite;
+}
+
+/* Shine animation */
+.coin.animated .coin-shine {
+  animation: coinShine 4s ease-in-out infinite;
+}
+
+@keyframes coinRotate {
+  0% {
+    transform: rotateY(0deg);
+    box-shadow: inset -4px 0 8px var(--coin-shadow), 0 0 4px var(--coin-shine);
+  }
+  25% {
+    transform: rotateY(90deg);
+    box-shadow: inset 0 0 8px var(--coin-shadow), 4px 0 8px var(--coin-shadow);
+  }
+  50% {
+    transform: rotateY(180deg);
+    box-shadow: inset 4px 0 8px var(--coin-shadow), 0 0 4px var(--coin-shine);
+  }
+  75% {
+    transform: rotateY(270deg);
+    box-shadow: inset 0 0 8px var(--coin-shadow), -4px 0 8px var(--coin-shadow);
+  }
+  100% {
+    transform: rotateY(360deg);
+    box-shadow: inset -4px 0 8px var(--coin-shadow), 0 0 4px var(--coin-shine);
+  }
+}
+
+@keyframes coinShine {
+  0%, 100% {
+    opacity: 0.2;
+    transform: scale(0.8);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.2);
+  }
+}
+
+/* Player's coin balance display (for header) */
+.player-coins {
+  position: fixed;
+  top: var(--spacing-lg);
+  right: var(--spacing-lg);
+  background: rgba(0, 0, 0, 0.6);
+  padding: var(--spacing-xs) var(--spacing-md);
+  border-radius: var(--border-radius-lg);
+  z-index: var(--z-ui);
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  box-shadow: var(--shadow-md);
+  border: var(--border-width-thin) solid var(--coin-edge);
+}
+
+/* Landscape orientation on mobile */
+@media (max-height: 500px) and (orientation: landscape) {
+  #landingScreen {
+    gap: clamp(6px, 1vw, 12px);
+  }
+  
+  #landingScreen h1 {
+    font-size: clamp(1rem, 3vh, 2rem);
+  }
+  
+  .shop-button {
+    top: 2vh !important;
+    left: 2vh !important;
+  }  #btnRivals {
+    top: 1vh !important; /* Position above shop button */
+    left: 2vh !important; /* Same left alignment as shop button */
+  }
+}
+
+/* Profile Modal Styling */
+.profile-container {
+  background-color: var(--bg-secondary);
+  border-radius: var(--border-radius-lg);
+  width: 90%;
+  max-width: 600px;
+  max-height: 80vh;
+  overflow-y: auto;
+  box-shadow: var(--shadow-lg);
+}
+
+.profile-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: linear-gradient(to right, var(--color-shop-dark), var(--color-shop));
+  padding: var(--spacing-md);
+  border-top-left-radius: var(--border-radius-lg);
+  border-top-right-radius: var(--border-radius-lg);
+  border-bottom: 2px solid var(--accent-primary);
+}
+
+.profile-content {
+  padding: var(--spacing-md);
+  background: linear-gradient(to bottom, #2d3748, #1a202c);
+  color: var(--text-primary);
+}
+
+.profile-info {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-lg);
+  margin-bottom: var(--spacing-lg);
+  padding-bottom: var(--spacing-lg);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.profile-avatar {
+  flex: 0 0 120px;
+}
+
+.profile-avatar img {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  border: 3px solid var(--accent-primary);
+  background-color: #222;
+}
+
+.profile-details {
+  flex: 1;
+  min-width: 250px;
+}
+
+.name-change-section {
+  margin-top: var(--spacing-md);
+  padding: var(--spacing-md);
+  background-color: rgba(0,0,0,0.3);
+  border-radius: var(--border-radius-md);
+}
+
+.name-change-cost {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin: var(--spacing-sm) 0;
+  font-weight: bold;
+  color: var(--color-shop);
+}
+
+.coin-icon.mini {
+  width: 20px;
+  height: 20px;
+  background-color: var(--coin-outer);
+  border-radius: 50%;
+  display: inline-block;
+  margin-right: 2px;
+  position: relative;
+}
+
+.coin-icon.mini::after {
+  content: "C";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: var(--coin-edge);
+  font-size: 10px;
+  font-weight: bold;
+}
+
+#newPlayerName {
+  width: 100%;
+  padding: var(--spacing-sm);
+  margin: var(--spacing-sm) 0;
+  background-color: rgba(255, 255, 255, 0.9);
+  border: 1px solid var(--color-shop-border);
+  border-radius: var(--border-radius-sm);
+}
+
+#changeNameBtn {
+  padding: var(--spacing-sm) var(--spacing-md);
+  background: linear-gradient(to bottom, var(--primary-color), var(--primary-dark));
+  border: none;
+  color: white;
+  border-radius: var(--border-radius-sm);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  font-weight: bold;
+}
+
+#changeNameBtn:hover {
+  background: linear-gradient(to bottom, var(--primary-hover), var(--primary-dark));
+  transform: translateY(-2px);
+}
+
+#changeNameBtn:disabled {
+  background-color: var(--color-neutral);
+  cursor: not-allowed;
+}
+
+.message {
+  margin-top: var(--spacing-sm);
+  font-size: 0.9em;
+}
+
+.message.error {
+  color: var(--accent-danger);
+}
+
+.message.success {
+  color: var(--accent-success);
+}
+
+.profile-stats {
+  margin-top: var(--spacing-md);
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: var(--spacing-md);
+  margin-top: var(--spacing-md);
+}
+
+.stat-item {
+  background-color: rgba(0,0,0,0.3);
+  padding: var(--spacing-sm);
+  border-radius: var(--border-radius-sm);
+  display: flex;
+  flex-direction: column;
+}
+
+.stat-value {
+  font-size: 1.2em;
+  font-weight: bold;
+  color: var(--accent-primary);
+}

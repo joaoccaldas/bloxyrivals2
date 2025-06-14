@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<!DOCTYPE html>
+<html lang="en">
+<head>  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Bloxy Rivals – Prototype</title>
+  <link rel="stylesheet" href="css/styles.css"/>
+  <link rel="stylesheet" href="css/confirmation-dialog.css"/>
+  <link rel="stylesheet" href="css/rivals-button.css"/>
+</head>
+<body>
+  <div id="videoLoadingScreen">
+    <video id="loadingVideo" preload="auto" muted playsinline autoplay disablePictureInPicture>
+      <source src="assets/videos/loading.mp4" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+    <div id="loadingProgress">
+      <div id="loadingBar"></div>
+    </div>
+    <button id="skipButton">Skip</button>
+  </div>
+  <div id="landingScreen" class="hidden">    <button id="btnRivals" class="rivals-button">
+      <div class="rivals-content">
+        <img src="assets/buttons/rivals.png" alt="Rivals" class="rivals-background" />
+        <div class="rivals-icon">
+          <span class="rivals-label">Rivals</span>
+        </div>
+      </div>
+    </button>
+    <button id="btnShop" class="shop-button">
+      <img src="assets/buttons/shop.png" alt="Shop" />
+    </button>    <button id="btnProfile" class="profile-button">
+      <img src="assets/buttons/skin.png" alt="Profile" />
+    </button>
+    <button id="btnStart">Play</button>
+    <button id="btnGameMode">Game Mode</button>
+  </div>
+  
+  <div id="shopScreen" class="overlay hidden">
+    <div class="shop-container">
+      <div class="shop-header">
+        <h2>Bloxy Shop</h2>
+        <button id="closeShop" class="close-button">&times;</button>
+      </div>
+      <div class="shop-content">
+        <div class="daily-reward">
+          <h3>Daily Reward</h3>
+          <div id="dailyRewardStatus"></div>
+          <button id="claimDailyReward" class="reward-button">Claim</button>
+        </div>
+        <div class="shop-offers">
+          <h3>Special Offers</h3>
+          <div class="offers-grid" id="shopOffers">
+            <!-- Offers will be generated here -->
+          </div>
+        </div>
+      </div>
+    </div>  </div>
+  
+  <div id="profileScreen" class="overlay hidden">
+    <div class="profile-container">
+      <div class="profile-header">
+        <h2>Player Profile</h2>
+        <button id="closeProfile" class="close-button">&times;</button>
+      </div>
+      <div class="profile-content">
+        <div class="profile-info">
+          <div class="profile-avatar">
+            <img src="assets/player/bear.png" alt="Player Avatar" id="playerAvatar">
+          </div>          <div class="profile-details">
+            <h3>Current Name: <span id="currentPlayerName">Player</span></h3>
+          </div>
+        </div>
+        <div class="profile-stats">
+          <h3>Player Stats</h3>
+          <div class="stats-grid">
+            <div class="stat-item">
+              <span class="stat-label">Games Played:</span>
+              <span class="stat-value" id="gamesPlayed">0</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-label">Highest Score:</span>
+              <span class="stat-value" id="highestScore">0</span>
+            </div>
+            <div class="stat-item">
+              <span class="stat-label">Total Kills:</span>
+              <span class="stat-value" id="totalKills">0</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <canvas id="gameCanvas" width="1000" height="800" style="display: none;"></canvas>
+  <div id="gameContainer"></div>  <div id="ranking-container"></div> <!-- Added container for RankingDisplay -->
+
+  <!-- Purchase confirmation dialog -->
+  <div id="confirmationDialog" class="confirmation-dialog-overlay">
+    <div class="confirmation-dialog">
+      <div class="confirmation-dialog-header">
+        <span>Confirm Purchase</span>
+        <button class="close-btn">&times;</button>
+      </div>
+      <div class="confirmation-dialog-content">
+        <div class="item-info">
+          <div class="item-image">
+            <img id="confirmItemImg" src="assets/player/bear.png" alt="Item">
+          </div>
+          <div class="item-details">
+            <div class="item-title" id="confirmItemName">Item Name</div>
+            <div class="item-price">
+              <img class="coin-icon" src="assets/buttons/coin.png" alt="Coins"> 
+              <span id="confirmItemPrice">100</span>
+            </div>
+          </div>
+        </div>
+        <p>Are you sure you want to buy this item?</p>
+        <div class="dialog-buttons">
+          <button class="cancel-btn">Cancel</button>
+          <button class="confirm-btn">Buy Now</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/videoLoader.js"></script>
+  <script type="module" src="../src/ui/landingPage.js"></script>
+  <script>
+    // Global click tracking for debugging
+    document.addEventListener('click', function(e) {
+      console.log('Global click detected on:', e.target.tagName, 
+                  e.target.id || e.target.className || 'unnamed element',
+                  'at position:', e.clientX, e.clientY);
+    });
+  </script>
+</body>
+</html>

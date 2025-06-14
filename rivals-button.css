@@ -1,0 +1,70 @@
+/* Rivals Button Character Styling */
+.rivals-content {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.rivals-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+.rivals-icon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 2;
+  filter: drop-shadow(0 0 8px rgba(0, 0, 0, 0.5));
+}
+
+.rivals-label {
+  font-family: 'Arial', sans-serif;
+  font-weight: bold;
+  color: #fff;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8), 0 0 10px rgba(255, 255, 0, 0.5);
+  font-size: 1rem;
+  background: rgba(0, 0, 0, 0.6);
+  padding: 2px 8px;
+  border-radius: 10px;
+  transform: translateY(0);
+  transition: transform 0.2s ease-in-out;
+}
+
+.rivals-button:hover .rivals-label {
+  transform: translateY(-3px);
+}
+
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .rivals-label {
+    font-size: 0.8rem;
+    padding: 1px 5px;
+  }
+}
+
+@media (max-width: 480px) {
+  .rivals-label {
+    font-size: 0.6rem;
+  }
+}

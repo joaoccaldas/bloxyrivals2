@@ -1,0 +1,153 @@
+/* Confirmation Dialog Styling */
+.confirmation-dialog-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  z-index: 10000;
+  justify-content: center;
+  align-items: center;
+}
+
+.confirmation-dialog {
+  background: linear-gradient(to bottom, #3b3b3b, #222222);
+  border-radius: 10px;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
+  width: 90%;
+  max-width: 400px;
+  padding: 0;
+  overflow: hidden;
+  animation: dialogAppear 0.3s ease-out;
+  border: 2px solid var(--color-shop);
+}
+
+@keyframes dialogAppear {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.confirmation-dialog-header {
+  background: linear-gradient(to right, var(--color-shop-dark), var(--color-shop));
+  color: var(--color-shop-text);
+  padding: 15px 20px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.confirmation-dialog-header .close-btn {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  color: var(--color-shop-text);
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.confirmation-dialog-header .close-btn:hover {
+  transform: scale(1.2);
+}
+
+.confirmation-dialog-content {
+  padding: 20px;
+  color: #ffffff;
+  text-align: center;
+}
+
+.item-info {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.item-image {
+  width: 64px;
+  height: 64px;
+  margin-right: 15px;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  padding: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.item-image img {
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.item-details {
+  text-align: left;
+}
+
+.item-title {
+  font-weight: bold;
+  margin-bottom: 5px;
+  font-size: 1.1rem;
+  color: #ffffff;
+}
+
+.item-price {
+  display: flex;
+  align-items: center;
+  color: var(--color-shop);
+}
+
+.coin-icon {
+  width: 20px;
+  height: 20px;
+  margin-right: 5px;
+}
+
+.dialog-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-top: 20px;
+  padding-bottom: 10px;
+}
+
+.dialog-buttons button {
+  padding: 10px 20px;
+  border-radius: 5px;
+  border: none;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  min-width: 100px;
+}
+
+.confirm-btn {
+  background-color: var(--color-success);
+  color: white;
+}
+
+.confirm-btn:hover {
+  background-color: var(--color-success-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 3px 5px rgba(0, 0, 0, 0.3);
+}
+
+.cancel-btn {
+  background-color: var(--secondary-color);
+  color: white;
+}
+
+.cancel-btn:hover {
+  background-color: var(--secondary-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 3px 5px rgba(0, 0, 0, 0.3);
+}

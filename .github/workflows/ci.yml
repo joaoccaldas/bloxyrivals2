@@ -25,3 +25,6 @@ jobs:
           find . -type f -name '*.js' -not -path './.git/*' -print0 | xargs -0 -n1 node --check
       - name: Verify entry page
         run: test -f index.html
+
+      - name: Entry-point references
+        run: python3 -m unittest discover -s tests -v
